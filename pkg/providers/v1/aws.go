@@ -5091,7 +5091,8 @@ func isFargateNode(nodeName string) bool {
 
 func (c *Cloud) nodeNameToInstanceID(nodeName types.NodeName) (InstanceID, error) {
 	if strings.HasPrefix(string(nodeName), rbnNamePrefix) {
-		return InstanceID(nodeName), nil
+		nodeNameParts := strings.Split(string(nodeName), ".")
+		return InstanceID(nodeNameParts[0]), nil
 	}
 	if len(nodeName) == 0 {
 		return "", fmt.Errorf("no nodeName provided")
